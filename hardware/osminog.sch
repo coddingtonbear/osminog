@@ -1,0 +1,547 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:ch340g
+LIBS:osminog-cache
+EELAYER 26 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L ATTINY2313-S IC1
+U 1 1 58C6031C
+P 6950 2250
+F 0 "IC1" H 6950 982 50  0000 C CNN
+F 1 "ATTINY2313-S" H 6950 1073 50  0000 C CNN
+F 2 "KiCad/Housings_SOIC.pretty:SOIC-20W_7.5x12.8mm_Pitch1.27mm" H 6950 1164 50  0000 C CIN
+F 3 "" H 6950 2250 50  0000 C CNN
+	1    6950 2250
+	-1   0    0    1   
+$EndComp
+$Comp
+L Crystal Y1
+U 1 1 58C6036A
+P 8450 2650
+F 0 "Y1" V 8404 2781 50  0000 L CNN
+F 1 "12" V 8495 2781 50  0000 L CNN
+F 2 "greatscottgadgets/gsg-kicad-lib/gsg-modules.pretty:HC-49S" H 8450 2650 50  0001 C CNN
+F 3 "" H 8450 2650 50  0000 C CNN
+	1    8450 2650
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR01
+U 1 1 58C603C0
+P 9350 2950
+F 0 "#PWR01" H 9350 2700 50  0001 C CNN
+F 1 "GND" H 9355 2777 50  0000 C CNN
+F 2 "" H 9350 2950 50  0000 C CNN
+F 3 "" H 9350 2950 50  0000 C CNN
+	1    9350 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C4
+U 1 1 58C603EA
+P 8850 2500
+F 0 "C4" V 8598 2500 50  0000 C CNN
+F 1 "22p" V 8689 2500 50  0000 C CNN
+F 2 "Capacitors_SMD:C_0805_HandSoldering" H 8888 2350 50  0001 C CNN
+F 3 "" H 8850 2500 50  0000 C CNN
+	1    8850 2500
+	0    1    1    0   
+$EndComp
+$Comp
+L C C5
+U 1 1 58C6042F
+P 8850 2800
+F 0 "C5" V 8598 2800 50  0000 C CNN
+F 1 "22p" V 8689 2800 50  0000 C CNN
+F 2 "Capacitors_SMD:C_0805_HandSoldering" H 8888 2650 50  0001 C CNN
+F 3 "" H 8850 2800 50  0000 C CNN
+	1    8850 2800
+	0    1    1    0   
+$EndComp
+$Comp
+L CH340G U1
+U 1 1 58C604E1
+P 3250 2500
+F 0 "U1" V 3197 3228 60  0000 L CNN
+F 1 "CH340G" V 3303 3228 60  0000 L CNN
+F 2 "KiCad/Housings_SOIC.pretty:SOIC-16_3.9x9.9mm_Pitch1.27mm" H 3200 3600 60  0001 C CNN
+F 3 "" H 3200 3600 60  0000 C CNN
+	1    3250 2500
+	1    0    0    -1  
+$EndComp
+Text GLabel 5650 1950 0    60   Output ~ 0
+CLKOUT
+Text GLabel 2550 2200 0    60   Input ~ 0
+CLKOUT
+Wire Wire Line
+	8100 2550 8300 2550
+Wire Wire Line
+	8300 2550 8300 2500
+Wire Wire Line
+	8300 2500 8700 2500
+Connection ~ 8450 2500
+Wire Wire Line
+	8100 2750 8300 2750
+Wire Wire Line
+	8300 2750 8300 2800
+Wire Wire Line
+	8300 2800 8700 2800
+Connection ~ 8450 2800
+Wire Wire Line
+	9000 2500 9350 2500
+Wire Wire Line
+	9350 1250 9350 2950
+Wire Wire Line
+	9000 2800 9350 2800
+Connection ~ 9350 2800
+Wire Wire Line
+	5650 1950 5800 1950
+Wire Wire Line
+	6950 1250 9350 1250
+Connection ~ 9350 2500
+$Comp
+L USB_OTG P1
+U 1 1 58C6063A
+P 1400 1900
+F 0 "P1" V 1523 2088 50  0000 L CNN
+F 1 "USB_OTG" V 1432 2088 50  0000 L CNN
+F 2 "osminog:MICRO-B_USB-INVERTED" V 1350 1800 50  0001 C CNN
+F 3 "" V 1350 1800 50  0000 C CNN
+	1    1400 1900
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1700 1900 2750 1900
+Wire Wire Line
+	2750 2000 1700 2000
+$Comp
+L GND #PWR02
+U 1 1 58C60723
+P 2000 1700
+F 0 "#PWR02" H 2000 1450 50  0001 C CNN
+F 1 "GND" H 2005 1527 50  0000 C CNN
+F 2 "" H 2000 1700 50  0000 C CNN
+F 3 "" H 2000 1700 50  0000 C CNN
+	1    2000 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L +5V #PWR03
+U 1 1 58C60755
+P 1800 2100
+F 0 "#PWR03" H 1800 1950 50  0001 C CNN
+F 1 "+5V" H 1815 2273 50  0000 C CNN
+F 2 "" H 1800 2100 50  0000 C CNN
+F 3 "" H 1800 2100 50  0000 C CNN
+	1    1800 2100
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	1700 1700 2000 1700
+Wire Wire Line
+	1700 2100 1800 2100
+Wire Wire Line
+	5800 2050 3750 2050
+Wire Wire Line
+	3750 2050 3750 2100
+Wire Wire Line
+	3750 2200 4050 2200
+Wire Wire Line
+	4050 2200 4050 2150
+Wire Wire Line
+	4050 2150 5800 2150
+$Comp
+L CONN_02X03 P3
+U 1 1 58C608B0
+P 3750 4850
+F 0 "P3" H 3750 5165 50  0000 C CNN
+F 1 "CONN_02X03" H 3750 5074 50  0000 C CNN
+F 2 "KiCad/Pin_Headers.pretty:Pin_Header_Straight_2x03_Pitch2.54mm_SMD" H 3750 3650 50  0001 C CNN
+F 3 "" H 3750 3650 50  0000 C CNN
+	1    3750 4850
+	1    0    0    -1  
+$EndComp
+$Comp
+L +5V #PWR04
+U 1 1 58C608EE
+P 4150 4750
+F 0 "#PWR04" H 4150 4600 50  0001 C CNN
+F 1 "+5V" V 4165 4878 50  0000 L CNN
+F 2 "" H 4150 4750 50  0000 C CNN
+F 3 "" H 4150 4750 50  0000 C CNN
+	1    4150 4750
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR05
+U 1 1 58C60915
+P 4150 4950
+F 0 "#PWR05" H 4150 4700 50  0001 C CNN
+F 1 "GND" V 4155 4822 50  0000 R CNN
+F 2 "" H 4150 4950 50  0000 C CNN
+F 3 "" H 4150 4950 50  0000 C CNN
+	1    4150 4950
+	0    -1   -1   0   
+$EndComp
+Text GLabel 8250 3050 2    60   Input ~ 0
+RESET
+Text GLabel 3350 4950 0    60   Output ~ 0
+RESET
+Text GLabel 5700 2350 0    60   BiDi ~ 0
+SCK
+Text GLabel 3350 4850 0    60   BiDi ~ 0
+SCK
+Text GLabel 3350 4750 0    60   BiDi ~ 0
+MISO
+Text GLabel 5700 2450 0    60   BiDi ~ 0
+MISO
+Text GLabel 5700 2550 0    60   BiDi ~ 0
+MOSI
+Text GLabel 4150 4850 2    60   BiDi ~ 0
+MOSI
+Wire Wire Line
+	5700 2350 5800 2350
+Wire Wire Line
+	5700 2450 5800 2450
+Wire Wire Line
+	5800 2550 5700 2550
+$Comp
+L CONN_01X03 P4
+U 1 1 58C60C83
+P 5500 4850
+F 0 "P4" V 5372 5028 50  0000 L CNN
+F 1 "CONN_01X03" V 5463 5028 50  0000 L CNN
+F 2 "KiCad/Pin_Headers.pretty:Pin_Header_Straight_1x03_Pitch2.54mm" H 5500 4850 50  0001 C CNN
+F 3 "" H 5500 4850 50  0000 C CNN
+	1    5500 4850
+	0    1    1    0   
+$EndComp
+$Comp
+L +5V #PWR06
+U 1 1 58C60CD0
+P 5500 4450
+F 0 "#PWR06" H 5500 4300 50  0001 C CNN
+F 1 "+5V" H 5515 4623 50  0000 C CNN
+F 2 "" H 5500 4450 50  0000 C CNN
+F 3 "" H 5500 4450 50  0000 C CNN
+	1    5500 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR07
+U 1 1 58C60D03
+P 5600 4450
+F 0 "#PWR07" H 5600 4200 50  0001 C CNN
+F 1 "GND" H 5605 4277 50  0000 C CNN
+F 2 "" H 5600 4450 50  0000 C CNN
+F 3 "" H 5600 4450 50  0000 C CNN
+	1    5600 4450
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5500 4650 5500 4450
+Wire Wire Line
+	5600 4450 5600 4650
+$Comp
+L +5V #PWR08
+U 1 1 58C60D95
+P 6950 3550
+F 0 "#PWR08" H 6950 3400 50  0001 C CNN
+F 1 "+5V" H 6965 3723 50  0000 C CNN
+F 2 "" H 6950 3550 50  0000 C CNN
+F 3 "" H 6950 3550 50  0000 C CNN
+	1    6950 3550
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	6950 3350 6950 3550
+$Comp
+L C C3
+U 1 1 58C60DFB
+P 7250 3450
+F 0 "C3" V 6998 3450 50  0000 C CNN
+F 1 "0.1u" V 7089 3450 50  0000 C CNN
+F 2 "Capacitors_SMD:C_0805_HandSoldering" H 7288 3300 50  0001 C CNN
+F 3 "" H 7250 3450 50  0000 C CNN
+	1    7250 3450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6950 3450 7100 3450
+Connection ~ 6950 3450
+Wire Wire Line
+	7400 3450 9100 3450
+Wire Wire Line
+	9100 3450 9100 2800
+Connection ~ 9100 2800
+Wire Wire Line
+	8100 3050 8250 3050
+Text GLabel 5650 1850 0    60   Output ~ 0
+XMIT
+Text GLabel 5400 4600 1    60   Input ~ 0
+XMIT
+Wire Wire Line
+	5400 4650 5400 4600
+Text Notes 5350 5050 0    60   ~ 0
+Connect standard 433mhz transmitter
+$Comp
+L BSS138 Q1
+U 1 1 58C612A6
+P 1900 4550
+F 0 "Q1" V 2136 4550 50  0000 C CNN
+F 1 "BSS138" V 2227 4550 50  0000 C CNN
+F 2 "TO_SOT_Packages_SMD:SOT-23" H 2100 4475 50  0001 L CIN
+F 3 "" H 1900 4550 50  0000 L CNN
+	1    1900 4550
+	0    1    1    0   
+$EndComp
+$Comp
+L CONN_01X02 P2
+U 1 1 58C6138B
+P 1850 5400
+F 0 "P2" V 1722 5528 50  0000 L CNN
+F 1 "CONN_01X02" V 1813 5528 50  0000 L CNN
+F 2 "KiCad/Pin_Headers.pretty:Pin_Header_Straight_1x02_Pitch2.54mm_SMD_Pin1Left" H 1850 5400 50  0001 C CNN
+F 3 "" H 1850 5400 50  0000 C CNN
+	1    1850 5400
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1900 5200 2100 5200
+Wire Wire Line
+	2100 5200 2100 4650
+Wire Wire Line
+	1700 4650 1700 5200
+Wire Wire Line
+	1700 5200 1800 5200
+$Comp
+L +5V #PWR09
+U 1 1 58C61579
+P 4350 1750
+F 0 "#PWR09" H 4350 1600 50  0001 C CNN
+F 1 "+5V" H 4365 1923 50  0000 C CNN
+F 2 "" H 4350 1750 50  0000 C CNN
+F 3 "" H 4350 1750 50  0000 C CNN
+	1    4350 1750
+	-1   0    0    1   
+$EndComp
+$Comp
+L C C2
+U 1 1 58C615C5
+P 3850 1450
+F 0 "C2" V 3598 1450 50  0000 C CNN
+F 1 "0.1u" V 3689 1450 50  0000 C CNN
+F 2 "Capacitors_SMD:C_0805_HandSoldering" H 3888 1300 50  0001 C CNN
+F 3 "" H 3850 1450 50  0000 C CNN
+	1    3850 1450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3750 1900 4000 1900
+Wire Wire Line
+	4000 1900 4000 1750
+Wire Wire Line
+	4000 1750 4350 1750
+Wire Wire Line
+	4150 1750 4150 1450
+Wire Wire Line
+	4150 1450 4000 1450
+Connection ~ 4150 1750
+Wire Wire Line
+	3700 1450 2000 1450
+Wire Wire Line
+	2000 1450 2000 1700
+$Comp
+L GND #PWR010
+U 1 1 58C617B1
+P 3950 3000
+F 0 "#PWR010" H 3950 2750 50  0001 C CNN
+F 1 "GND" H 3955 2827 50  0000 C CNN
+F 2 "" H 3950 3000 50  0000 C CNN
+F 3 "" H 3950 3000 50  0000 C CNN
+	1    3950 3000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3950 3000 3750 3000
+$Comp
+L C C1
+U 1 1 58C61829
+P 2450 2600
+F 0 "C1" V 2198 2600 50  0000 C CNN
+F 1 "0.1u" V 2289 2600 50  0000 C CNN
+F 2 "Capacitors_SMD:C_0805_HandSoldering" H 2488 2450 50  0001 C CNN
+F 3 "" H 2450 2600 50  0000 C CNN
+	1    2450 2600
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR011
+U 1 1 58C61871
+P 2150 2600
+F 0 "#PWR011" H 2150 2350 50  0001 C CNN
+F 1 "GND" H 2155 2427 50  0000 C CNN
+F 2 "" H 2150 2600 50  0000 C CNN
+F 3 "" H 2150 2600 50  0000 C CNN
+	1    2150 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2750 2600 2600 2600
+Wire Wire Line
+	2300 2600 2150 2600
+$Comp
+L GND #PWR012
+U 1 1 58C61A0E
+P 1200 4350
+F 0 "#PWR012" H 1200 4100 50  0001 C CNN
+F 1 "GND" H 1205 4177 50  0000 C CNN
+F 2 "" H 1200 4350 50  0000 C CNN
+F 3 "" H 1200 4350 50  0000 C CNN
+	1    1200 4350
+	1    0    0    -1  
+$EndComp
+$Comp
+L R_Small R1
+U 1 1 58C61A6A
+P 1550 4300
+F 0 "R1" V 1354 4300 50  0000 C CNN
+F 1 "R_Small" V 1445 4300 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" H 1550 4300 50  0001 C CNN
+F 3 "" H 1550 4300 50  0000 C CNN
+	1    1550 4300
+	0    1    1    0   
+$EndComp
+$Comp
+L R_Small R2
+U 1 1 58C61AD7
+P 1850 3950
+F 0 "R2" H 1791 3904 50  0000 R CNN
+F 1 "R_Small" H 1791 3995 50  0000 R CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" H 1850 3950 50  0001 C CNN
+F 3 "" H 1850 3950 50  0000 C CNN
+	1    1850 3950
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	1200 4350 1200 4300
+Wire Wire Line
+	1200 4300 1450 4300
+Wire Wire Line
+	1650 4300 1850 4300
+Wire Wire Line
+	1850 4050 1850 4350
+Connection ~ 1850 4300
+Text GLabel 2250 3850 2    60   Input ~ 0
+ENABLE_RELAY
+Text GLabel 5700 2950 0    60   Output ~ 0
+ENABLE_RELAY
+Wire Wire Line
+	1850 3850 2250 3850
+Wire Wire Line
+	5700 2950 5800 2950
+Wire Wire Line
+	5800 1850 5650 1850
+Wire Wire Line
+	2750 2200 2550 2200
+Wire Wire Line
+	3350 4750 3500 4750
+Wire Wire Line
+	3350 4850 3500 4850
+Wire Wire Line
+	3350 4950 3500 4950
+Wire Wire Line
+	4000 4750 4150 4750
+Wire Wire Line
+	4150 4850 4000 4850
+Wire Wire Line
+	4000 4950 4150 4950
+$Comp
+L CONN_01X03 P?
+U 1 1 58CA31A5
+P 7500 4850
+F 0 "P?" V 7372 5028 50  0000 L CNN
+F 1 "CONN_01X03" V 7463 5028 50  0000 L CNN
+F 2 "KiCad/Pin_Headers.pretty:Pin_Header_Straight_1x03_Pitch2.54mm" H 7500 4850 50  0001 C CNN
+F 3 "" H 7500 4850 50  0000 C CNN
+	1    7500 4850
+	0    1    1    0   
+$EndComp
+Text GLabel 7500 4550 1    60   BiDi ~ 0
+TEMP
+$Comp
+L +5V #PWR?
+U 1 1 58CA3230
+P 7600 4550
+F 0 "#PWR?" H 7600 4400 50  0001 C CNN
+F 1 "+5V" H 7615 4723 50  0000 C CNN
+F 2 "" H 7600 4550 50  0000 C CNN
+F 3 "" H 7600 4550 50  0000 C CNN
+	1    7600 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 58CA32D7
+P 7400 4550
+F 0 "#PWR?" H 7400 4300 50  0001 C CNN
+F 1 "GND" H 7405 4377 50  0000 C CNN
+F 2 "" H 7400 4550 50  0000 C CNN
+F 3 "" H 7400 4550 50  0000 C CNN
+	1    7400 4550
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	7400 4650 7400 4550
+Wire Wire Line
+	7500 4550 7500 4650
+Wire Wire Line
+	7600 4650 7600 4550
+Text Notes 7300 5050 0    60   ~ 0
+Connect DHT11 temp/humidity sensor\n
+Text GLabel 5700 3050 0    60   BiDi ~ 0
+TEMP
+Wire Wire Line
+	5700 3050 5800 3050
+$EndSCHEMATC
