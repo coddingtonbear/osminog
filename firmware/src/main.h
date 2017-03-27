@@ -1,6 +1,16 @@
 #include <Arduino.h>
-#include <tinudht.h>
+#include <DHT.h>
 #include <RCSwitch.h>
+#include <Bounce2.h>
+#include <SerialCommand.h>
 
 void setup();
 void loop();
+
+void powerOn();
+void powerOff();
+void unrecognized();
+void getHumidity();
+void getTemperature();
+
+bool updateTemperature();
