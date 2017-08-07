@@ -12,3 +12,9 @@ driver/src
 driver/lib
 driver/bin
 driver/include
+plugin/.Python
+plugin/lib
+plugin/src
+plugin/bin
+plugin/include
+plugin/pip-selfcheck.json
