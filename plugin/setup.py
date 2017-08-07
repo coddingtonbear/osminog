@@ -1,3 +1,5 @@
+from setuptools import setup
+
 import octoprint_setuptools
 
 plugin_identifier = 'osminog'
@@ -31,3 +33,5 @@ setup_parameters = octoprint_setuptools.create_plugin_setup_parameters(
     ignored_packages=plugin_ignored_packages,
     additional_data=plugin_additional_data
 )
+
+setup(**setup_parameters)
