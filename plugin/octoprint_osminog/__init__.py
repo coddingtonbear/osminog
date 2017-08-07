@@ -40,13 +40,9 @@ class OsminogPlugin(
         return self._osminog_port.readline().strip()
 
     def on_event(self, event, payload):
-        if event == Events.PRINT_STARTED:
+        if event == Events.POWER_ON:
             self.send_command('POWERON')
-        if event in (
-            Events.PRINT_STOPPED,
-            Events.PRINT_FAILED,
-            Events.PRINT_CANCELLED,
-        ):
+        if event == Events.POWER_OFF:
             self.send_command('POWEROFF')
 
         if time.time() > self._last_filament_check + self.CHECK_INTERVAL:
