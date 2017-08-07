@@ -21,11 +21,20 @@ class OsminogPlugin(
         port = self._settings.get(["port"])
         self._osminog_port = None
         if port:
-            self._osminog_port = serial.Serial(self._settings.get(["port"]))
+            try:
+                self._osminog_port = serial.Serial(self._settings.get(["port"]))
+            except:
+                self._logger.error(
+                    "Unable to connect to port %s",
+                    self._settings.get(["port"])
+                )
 
     def send_command(self, command):
         if not self._osminog_port:
-            return
+            self._logger.info(
+                "No connection to osminog; not sending %s",
+                command,
+            )
 
         self._osminog_port.write(command.encode('utf8'))
         return self._osminog_port.readline().strip()
