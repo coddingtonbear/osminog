@@ -35,6 +35,7 @@ class OsminogPlugin(
                 "No connection to osminog; not sending %s",
                 command,
             )
+            return
 
         self._osminog_port.write(command.encode('utf8'))
         return self._osminog_port.readline().strip()
