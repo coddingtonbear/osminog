@@ -18,11 +18,13 @@ class OsminogPlugin(
         self._last_filament_check = 0
         self._printer_paused = False
 
-        port = self._settings.get(["port"])
+        self.port = self._settings.get(["port"])
         self._osminog_port = None
-        if port:
+        if self.port:
             try:
-                self._osminog_port = serial.Serial(self._settings.get(["port"]))
+                self._osminog_port = serial.Serial(
+                    self._settings.get(["port"])
+                )
             except:
                 self._logger.error(
                     "Unable to connect to port %s",
@@ -38,7 +40,17 @@ class OsminogPlugin(
             return
 
         self._osminog_port.write(command.encode('utf8'))
-        return self._osminog_port.readline().strip()
+        self._logger.info(
+            "Sending command: %s",
+            command,
+        )
+        response = self._osminog_port.readline().strip()
+        self._logger.info(
+            "Received response: %s",
+            response
+        )
+
+        return response
 
     def on_event(self, event, payload):
         if event == Events.POWER_ON:
