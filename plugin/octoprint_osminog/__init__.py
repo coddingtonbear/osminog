@@ -88,7 +88,10 @@ class OsminogPlugin(
             self.send_command('POWERON')
         if event == Events.POWER_OFF:
             self.send_command('POWEROFF')
-        if event == Events.PRINT_PAUSED:
+        if event in (
+            Events.PRINT_PAUSED,
+            Events.PRINT_DONE,
+        ):
             self.send_command("BUZZER")
             time.sleep(0.5)
             self.send_command("BUZZER")
