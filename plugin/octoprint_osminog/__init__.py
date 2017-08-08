@@ -31,7 +31,8 @@ class OsminogPlugin(
 
         try:
             self._osminog_port = serial.Serial(
-                self._settings.get(["port"])
+                self._settings.get(["port"]),
+                timeout=0.1
             )
         except:
             self._logger.error(
@@ -48,7 +49,7 @@ class OsminogPlugin(
             return
 
         self._osminog_port.reset_input_buffer()
-        self._osminog_port.write(command.encode('utf8'))
+        self._osminog_port.write(command.encode('utf8') + b'\n')
         self._logger.info(
             "Sending command: %s",
             command,
