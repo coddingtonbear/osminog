@@ -32,7 +32,7 @@ class OsminogPlugin(
         try:
             self._osminog_port = serial.Serial(
                 self._settings.get(["port"]),
-                timeout=0.1
+                timeout=2
             )
         except:
             self._logger.error(
