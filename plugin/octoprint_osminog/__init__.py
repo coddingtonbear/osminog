@@ -32,8 +32,6 @@ class OsminogPlugin(
         if self._osminog_port:
             self._osminog_port.close()
 
-        self._osminog_port = None
-
         try:
             self._osminog_port = serial.Serial(
                 self._settings.get(["port"]),
