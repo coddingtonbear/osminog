@@ -20,10 +20,15 @@ class OsminogPlugin(
 
         self.port = self._settings.get(["port"])
         self._osminog_port = None
-        if self.port:
-            self.connect()
+        self.connect()
 
     def connect(self):
+        if not self.port:
+            self._logger.info(
+                "Cannot connect; no port specified.",
+            )
+            return
+
         if self._osminog_port:
             self._osminog_port.close()
 
@@ -48,17 +53,24 @@ class OsminogPlugin(
             )
             return
 
-        self._osminog_port.reset_input_buffer()
-        self._osminog_port.write(command.encode('utf8') + b'\r\n')
-        self._logger.info(
-            "Sending command: %s",
-            command,
-        )
-        response = self._osminog_port.readline().strip()
-        self._logger.info(
-            "Received response: %s",
-            response
-        )
+        try:
+            self._osminog_port.reset_input_buffer()
+            self._osminog_port.write(command.encode('utf8') + b'\r\n')
+            self._logger.info(
+                "Sending command: %s",
+                command,
+            )
+            response = self._osminog_port.readline().strip()
+            self._logger.info(
+                "Received response: %s",
+                response
+            )
+        except serial.serialutil.SerialException as e:
+            self._logger.error(
+                "Serial connection lost: %s",
+                str(e)
+            )
+            self.connect()
 
         return response
 
@@ -73,13 +85,21 @@ class OsminogPlugin(
 
     def _do_filament_check(self):
         available = self.send_command('FILAMENT')
+        self._last_filament_check = time.time()
+
         if available == '0':
             if not self._printer_paused:
                 self._printer.pause_print()
-                self._printer_paused = True
+                self._printer_paused = time.time()
             self.send_command("BUZZER")
+            return
 
-        self._last_filament_check = time.time()
+        if (
+            self._printer_paused and
+            time.time() - self.printer_paused > 60 and
+            self._printer.is_printing()
+        ):
+            self._printer_paused = False
 
     def get_template_configs(self):
         return [
