@@ -12,8 +12,8 @@ What this provides is a USB device allowing me to:
   off or on.
 * Switch DC power to a LED lighting strip.
 * Gather temperature and humidity measurements.
-* Control a strip of addressable RGB LEDs. (Planned)
-* Beep upon completion.  (Planned)
+* Watch whether I'm nearly out of filament using a [cheap filament sensor off of Ebay](https://www.ebay.com/i/371913487805?chn=ps&dispItem=1).
+* Beep when paused.  This is useful for knowing when to change filament or when I need to insert a captive bolt or magnet.
 
 ## Commands
 
@@ -21,6 +21,8 @@ What this provides is a USB device allowing me to:
 * ``POWEROFF``: Turn off the RF-controlled outlet
 * ``GETTEMPERATURE``: Return the current temperature (Celsius)
 * ``GETHUMIDITY``: Return the current humidity level
+* ``BUZZER``: Buzz the buzzer for half a second
+* ``FILAMENT``: Return a "1" or "0" depending upon whether filament is detected in the filament sensor.
 
 ## Schematic
 
