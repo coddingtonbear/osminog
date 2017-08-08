@@ -47,6 +47,7 @@ class OsminogPlugin(
             )
             return
 
+        self._osminog_port.reset_input_buffer()
         self._osminog_port.write(command.encode('utf8'))
         self._logger.info(
             "Sending command: %s",
