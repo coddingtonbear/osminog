@@ -13,7 +13,7 @@ What this provides is a USB device allowing me to:
 * Switch DC power to a LED lighting strip.
 * Gather temperature and humidity measurements.
 * Watch whether I'm nearly out of filament using a [cheap filament sensor off of Ebay](https://www.ebay.com/i/371913487805?chn=ps&dispItem=1).
-* Beep when paused.  This is useful for knowing when to change filament or when I need to insert a captive bolt or magnet.
+* Beep when paused or when a print has completed.  This is useful for knowing when to change filament or when I need to insert a captive bolt or magnet.
 
 ## Commands
 
