@@ -65,10 +65,12 @@ class OsminogPlugin(
             )
         except serial.serialutil.SerialException as e:
             self._logger.error(
-                "Serial connection lost: %s",
+                "Serial connection lost: %s; reconnecting...",
                 str(e)
             )
             self.connect()
+            time.sleep(1)
+            response = self.send_command(command)
 
         return response
 
