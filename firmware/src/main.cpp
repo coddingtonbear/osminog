@@ -10,7 +10,7 @@
 
 #define RELAY_PIN 2
 
-#define LED_PIN 16
+#define FILAMENT_PIN 16
 
 #define BUZZER_PIN A0
 
@@ -33,12 +33,17 @@ void setup() {
     button.attach(BUTTON_PIN);
     button.interval(50);
 
-    tone(BUZZER_PIN, 2000, 5000);
+    pinMode(BUZZER_PIN, OUTPUT);
+    soundBuzzer(100);
+
+    pinMode(FILAMENT_PIN, INPUT);
 
     cmd.addCommand("POWEROFF", powerOff);
     cmd.addCommand("POWERON", powerOn);
     cmd.addCommand("GETTEMPERATURE", getTemperature);
     cmd.addCommand("GETHUMIDITY", getHumidity);
+    cmd.addCommand("BUZZER", soundBuzzer);
+    cmd.addCommand("FILAMENT", checkFilament);
     cmd.addDefaultHandler(unrecognized);
     Serial.println("Ready");
 }
@@ -47,16 +52,20 @@ void unrecognized() {
     Serial.println("Error");
 }
 
+void checkFilament() {
+    Serial.println(digitalRead(FILAMENT_PIN));
+}
+
 void powerOn() {
     outletSwitch.send(OUTLET_ON, 24);
     poweredOn = true;
-    Serial.println("Power On Transmitted");
+    Serial.println("OK");
 }
 
 void powerOff() {
     outletSwitch.send(OUTLET_OFF, 24);
     poweredOn = false;
-    Serial.println("Power Off Transmitted");
+    Serial.println("OK");
 }
 
 void getTemperature() {
@@ -65,6 +74,19 @@ void getTemperature() {
 
 void getHumidity() {
     Serial.println(dht.readHumidity());
+}
+
+
+void soundBuzzer() {
+    soundBuzzer(500);
+}
+
+
+void soundBuzzer(int milliseconds) {
+    digitalWrite(BUZZER_PIN, HIGH);
+    delay(milliseconds);
+    digitalWrite(BUZZER_PIN, LOW);
+    Serial.println("OK");
 }
 
 

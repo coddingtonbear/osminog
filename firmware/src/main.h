@@ -12,5 +12,8 @@ void powerOff();
 void unrecognized();
 void getHumidity();
 void getTemperature();
+void soundBuzzer();
+void soundBuzzer(int milliseconds);
+void checkFilament();
 
 bool updateTemperature();
