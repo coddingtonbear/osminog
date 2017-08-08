@@ -628,9 +628,9 @@ F 3 "" H 3200 7000 50  0000 C CNN
 	-1   0    0    1   
 $EndComp
 Text GLabel 6000 2700 0    60   Output ~ 0
-LED
+FILAMENT
 Text GLabel 3000 7000 1    60   Input ~ 0
-LED
+FILAMENT
 Wire Wire Line
 	3000 7000 3000 7150
 Wire Wire Line
