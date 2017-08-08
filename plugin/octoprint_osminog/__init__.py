@@ -72,26 +72,35 @@ class OsminogPlugin(
     def _send_command(self, command):
         self._osminog_port.reset_input_buffer()
         self._osminog_port.write(command.encode('utf8') + b'\r\n')
-        self._logger.info(
-            "Sending command: %s",
-            command,
-        )
         response = self._osminog_port.readline().strip()
-        self._logger.info(
-            "Received response: %s",
-            response
+        self._logger.debug(
+            "Osminog Command: %s -> %s",
+            command,
+            response,
         )
         return response
 
     def on_event(self, event, payload):
         if event == Events.POWER_ON:
+            self._logger.info(
+                "%s event detected; powering on.",
+                event,
+            )
             self.send_command('POWERON')
         if event == Events.POWER_OFF:
+            self._logger.info(
+                "%s event detected; powering off.",
+                event,
+            )
             self.send_command('POWEROFF')
         if event in (
             Events.PRINT_PAUSED,
             Events.PRINT_DONE,
         ):
+            self._logger.info(
+                "%s event detected; buzzing buzzer.",
+                event,
+            )
             self.send_command("BUZZER")
             time.sleep(0.5)
             self.send_command("BUZZER")
@@ -116,6 +125,9 @@ class OsminogPlugin(
             self._filament_checks.popleft()
 
         if all(not check for check in self._filament_checks):
+            self._logger.warning(
+                "Filament outage detected; pausing print.",
+            )
             self._printer.pause_print()
 
     def get_template_configs(self):
