@@ -96,7 +96,7 @@ class OsminogPlugin(
 
         if (
             self._printer_paused and
-            time.time() - self.printer_paused > 60 and
+            time.time() - self._printer_paused > 60 and
             self._printer.is_printing()
         ):
             self._printer_paused = False
