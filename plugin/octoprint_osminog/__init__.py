@@ -9,8 +9,8 @@ from octoprint.events import Events
 class OsminogPlugin(
     octoprint.plugin.StartupPlugin,
     octoprint.plugin.EventHandlerPlugin,
-    octoprint.plugin.TemplatePlugin,
     octoprint.plugin.SettingsPlugin,
+    octoprint.plugin.TemplatePlugin,
 ):
     CHECK_INTERVAL = 10
 
@@ -21,15 +21,23 @@ class OsminogPlugin(
         self.port = self._settings.get(["port"])
         self._osminog_port = None
         if self.port:
-            try:
-                self._osminog_port = serial.Serial(
-                    self._settings.get(["port"])
-                )
-            except:
-                self._logger.error(
-                    "Unable to connect to port %s",
-                    self._settings.get(["port"])
-                )
+            self.connect()
+
+    def connect(self):
+        if self._osminog_port:
+            self._osminog_port.close()
+
+        self._osminog_port = None
+
+        try:
+            self._osminog_port = serial.Serial(
+                self._settings.get(["port"])
+            )
+        except:
+            self._logger.error(
+                "Unable to connect to port %s",
+                self._settings.get(["port"])
+            )
 
     def send_command(self, command):
         if not self._osminog_port:
@@ -82,6 +90,15 @@ class OsminogPlugin(
                 'custom_bindings': False,
             }
         ]
+
+    def get_settings_defaults(self):
+        return {
+            'port': '',
+        }
+
+    def on_settings_save(self, data):
+        octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
+        self.connect()
 
 
 __plugin_name__ = 'Osminog'
