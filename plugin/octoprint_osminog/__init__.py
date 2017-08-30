@@ -113,10 +113,13 @@ class OsminogPlugin(
         available = int(self.send_command('FILAMENT'))
 
         if not available:
-            self._logger.warning(
-                "Filament outage detected; pausing print.",
-            )
-            self._printer.pause_print()
+            # Double-check:
+            available = int(self.send_command('FILAMENT'))
+            if not available:
+                self._logger.warning(
+                    "Filament outage detected; pausing print.",
+                )
+                self._printer.pause_print()
 
     def get_template_configs(self):
         return [
