@@ -17,15 +17,7 @@ class OsminogPlugin(
 
     def initialize(self):
         self._last_filament_check = 0
-        self._filament_checks = collections.deque([])
-        self._last_available = None
-
         self.port = self._settings.get(["port"])
-        try:
-            self.check_count = int(self._settings.get(["check_count"]))
-        except (ValueError, TypeError):
-            self.check_count = 2
-
         self._osminog_port = None
         self.connect()
 
@@ -120,11 +112,7 @@ class OsminogPlugin(
     def _do_filament_check(self):
         available = int(self.send_command('FILAMENT'))
 
-        self._filament_checks.append(available)
-        while(len(self._filament_checks) > self.check_count):
-            self._filament_checks.popleft()
-
-        if all(not check for check in self._filament_checks):
+        if not available:
             self._logger.warning(
                 "Filament outage detected; pausing print.",
             )
@@ -141,7 +129,6 @@ class OsminogPlugin(
     def get_settings_defaults(self):
         return {
             'port': '',
-            'check_count': '2',
         }
 
     def on_settings_save(self, data):
