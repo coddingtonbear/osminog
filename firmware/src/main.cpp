@@ -45,7 +45,7 @@ void setup() {
     cmd.addCommand("BUZZER", soundBuzzer);
     cmd.addCommand("FILAMENT", checkFilament);
     cmd.addDefaultHandler(unrecognized);
-    Serial.println("Ready");
+    Serial.println("Osminog 1.0 Ready");
 }
 
 void unrecognized() {
