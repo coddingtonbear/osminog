@@ -82,7 +82,10 @@ class OsminogPlugin(
                 time.sleep(1)
 
     def _send_command(self, command):
-        self._osminog_port.reset_input_buffer()
+        if hasattr(self._osminog_port, 'reset_input_buffer'):
+            self._osminog_port.reset_input_buffer()
+        else:
+            self._osminog_port.flushInput()
         self._osminog_port.write(command.encode('utf8') + b'\r\n')
         response = self._osminog_port.readline().strip()
         self._logger.debug(
