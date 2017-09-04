@@ -14,6 +14,10 @@ class OsminogPlugin(
     octoprint.plugin.TemplatePlugin,
 ):
     CHECK_INTERVAL = 10
+    MAX_ATTEMPTS = 5
+
+    BUZZER_BEEPS = 5
+    BUZZER_DELAY = 0.3
 
     def initialize(self):
         self._last_filament_check = 0
@@ -21,44 +25,60 @@ class OsminogPlugin(
         self._osminog_port = None
         self.connect()
 
-    def connect(self):
+    def connect(self, close_existing=False):
         if not self.port:
             self._logger.info(
                 "Cannot connect; no port specified.",
             )
-            return
+            return False
 
-        if self._osminog_port:
-            self._osminog_port.close()
+        if self._osminog_port and close_existing:
+            try:
+                self._osminog_port.close()
+            except Exception as e:
+                self._logger.error(
+                    "Unable to close existing connection: %s",
+                    str(e)
+                )
+        elif self._osminog_port:
+            self._logger.debug(
+                "Already connected; leaving existing connection as-is."
+            )
+            return True
 
         try:
             self._osminog_port = serial.Serial(
                 self._settings.get(["port"]),
                 timeout=2
             )
-        except:
+            return True
+        except Exception as e:
             self._logger.error(
-                "Unable to connect to port %s",
-                self._settings.get(["port"])
+                "Unable to connect to port %s: %s",
+                self._settings.get(["port"]),
+                str(e),
             )
 
     def send_command(self, command):
-        if not self._osminog_port:
-            self._logger.info(
-                "No connection to osminog; not sending %s",
-                command,
-            )
-            return
-
+        attempt_count = 0
         while True:
+            attempt_count += 1
+            if attempt_count > self.MAX_ATTEMPTS:
+                logger.error(
+                    "Exceeded max attempts at sending command %s: aborting.",
+                    command,
+                )
+                return
+
             try:
+                if not self.connect():
+                    continue
                 return self._send_command(command)
             except serial.serialutil.SerialException as e:
                 self._logger.error(
                     "Serial connection lost: %s; reconnecting...",
                     str(e)
                 )
-                self.connect()
                 time.sleep(1)
 
     def _send_command(self, command):
@@ -93,11 +113,9 @@ class OsminogPlugin(
                 "%s event detected; buzzing buzzer.",
                 event,
             )
-            self.send_command("BUZZER")
-            time.sleep(0.5)
-            self.send_command("BUZZER")
-            time.sleep(0.5)
-            self.send_command("BUZZER")
+            for _ in xrange(self.BUZZER_BEEPS):
+                self.send_command("BUZZER")
+                time.sleep(self.BUZZER_DELAY)
 
         if (
             time.time() >
@@ -136,7 +154,7 @@ class OsminogPlugin(
 
     def on_settings_save(self, data):
         octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
-        self.connect()
+        self.connect(close_existing=True)
 
 
 __plugin_name__ = 'Osminog'

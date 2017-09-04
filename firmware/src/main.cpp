@@ -57,15 +57,15 @@ void checkFilament() {
 }
 
 void powerOn() {
+    Serial.println("OK");
     outletSwitch.send(OUTLET_ON, 24);
     poweredOn = true;
-    Serial.println("OK");
 }
 
 void powerOff() {
+    Serial.println("OK");
     outletSwitch.send(OUTLET_OFF, 24);
     poweredOn = false;
-    Serial.println("OK");
 }
 
 void getTemperature() {
@@ -83,10 +83,10 @@ void soundBuzzer() {
 
 
 void soundBuzzer(int milliseconds) {
+    Serial.println("OK");
     digitalWrite(BUZZER_PIN, HIGH);
     delay(milliseconds);
     digitalWrite(BUZZER_PIN, LOW);
-    Serial.println("OK");
 }
 
 
